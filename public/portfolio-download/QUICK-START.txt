@@ -1,0 +1,31 @@
+╔══════════════════════════════════════════════════════════╗
+║   Akaforonye Michael · Portfolio Website — Quick Start  ║
+╚══════════════════════════════════════════════════════════╝
+
+IMMEDIATE STEPS
+───────────────
+1. Open index.html in your browser → your site is live locally!
+
+2. Add your profile photo:
+   • Save your photo as: images/your-photo.jpg
+
+3. Add project screenshots:
+   • Save them as: images/project1.jpg, images/project2.jpg, etc.
+
+4. Open index.html in a text editor and search for "EDIT:" to
+   find every piece of content you should personalise.
+
+5. To go live online → drag this whole folder onto netlify.com
+   (free account, takes 30 seconds)
+
+FULL GUIDE → See README.md for detailed instructions on:
+   • Changing colours
+   • Adding projects, experience, education
+   • Making the contact form send real emails
+   • Hosting on GitHub Pages, Netlify, Vercel, or cPanel
+
+SUPPORT
+───────
+Font Awesome icons:  https://fontawesome.com/icons
+Compress images:     https://squoosh.app
+Free hosting:        https://netlify.com

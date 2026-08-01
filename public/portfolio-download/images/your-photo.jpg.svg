@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="198" fill="url(#accent)" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.5"/>
+  <!-- Person silhouette -->
+  <circle cx="200" cy="155" r="55" fill="#334155"/>
+  <ellipse cx="200" cy="310" rx="90" ry="70" fill="#334155"/>
+  <text x="200" y="375" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8"
+        text-anchor="middle" font-weight="500">Replace with your photo</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.15"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="#0f172a"/>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <!-- Decorative bar chart -->
+  <rect x="100" y="200" width="60" height="140" rx="6" fill="#22d3ee" opacity="0.35"/>
+  <rect x="200" y="130" width="60" height="210" rx="6" fill="#3b82f6" opacity="0.35"/>
+  <rect x="300" y="160" width="60" height="180" rx="6" fill="#22d3ee" opacity="0.35"/>
+  <rect x="400" y="100" width="60" height="240" rx="6" fill="#3b82f6" opacity="0.35"/>
+  <rect x="500" y="180" width="60" height="160" rx="6" fill="#22d3ee" opacity="0.35"/>
+  <rect x="600" y="120" width="60" height="220" rx="6" fill="#3b82f6" opacity="0.35"/>
+  <!-- Label -->
+  <text x="400" y="60" font-family="Inter,sans-serif" font-size="22" fill="#22d3ee"
+        text-anchor="middle" font-weight="700">Project Screenshot</text>
+  <text x="400" y="90" font-family="Inter,sans-serif" font-size="14" fill="#64748b"
+        text-anchor="middle">Replace src with your image path</text>
+</svg>
