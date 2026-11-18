@@ -44,6 +44,7 @@
       position: fixed; top: 0; left: 0; height: 100%; width: 256px;
       background: linear-gradient(180deg, #0f172a, #1e293b, #0f172a);
       z-index: 40; display: flex; flex-direction: column; justify-content: center;
+      padding: 2.5rem 0 0.5rem; overflow-y: auto;
       box-shadow: 4px 0 30px rgba(0,0,0,0.5);
       transition: transform 0.3s;
     }
@@ -467,81 +468,58 @@
        CONTACT SECTION
     ════════════════════════════════════════════ */
     #contact { background: #0f172a; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .form-card {
-      background: rgba(30,41,59,0.6); border: 1px solid rgba(51,65,85,0.5);
-      border-radius: 1rem; padding: 2rem;
-    }
-    .cta-card {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; gap: 1rem;
-    }
-    .cta-icon {
-      width: 4rem; height: 4rem; border-radius: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .cta-icon i { color: #fff; font-size: 1.5rem; }
-    .cta-title { color: #fff; font-weight: 700; font-size: 1.4rem; }
-    .cta-text { color: #94a3b8; line-height: 1.7; max-width: 24rem; margin-bottom: 0.5rem; }
-    .cta-btn {
-      width: 100%; max-width: 20rem; text-align: center;
-      background-color: transparent; cursor: pointer;
-      font-family: 'Inter', sans-serif; font-size: 1rem;
-    }
-    .btn-primary.cta-btn { background: linear-gradient(90deg, #06b6d4, #2563eb); }
-    .cta-btn.copied { border-color: #22c55e; color: #22c55e; }
-    .cta-alt {
-      color: #94a3b8; font-size: 0.875rem; text-decoration: none;
-      margin-top: 0.5rem; transition: color 0.2s;
-    }
-    .cta-alt:hover { color: #22d3ee; }
-
-    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+    /* Six equal cards: 3 columns on desktop, 2 on tablet, 1 on phones */
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.25rem; }
     .contact-card {
-      display: flex; gap: 1rem;
+      position: relative; display: flex; flex-direction: column; gap: 0.75rem;
       background: rgba(30,41,59,0.6); border: 1px solid rgba(51,65,85,0.5);
-      border-radius: 0.75rem; padding: 1.25rem; transition: border-color 0.2s;
+      border-radius: 1rem; padding: 1.5rem; transition: all 0.25s;
     }
-    .contact-card:hover { border-color: rgba(6,182,212,0.4); }
+    .contact-card:has(.contact-link):hover {
+      border-color: rgba(6,182,212,0.4); transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(6,182,212,0.08);
+    }
     .contact-icon {
       width: 3rem; height: 3rem; border-radius: 0.75rem; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .contact-icon i { color: #fff; }
+    .contact-icon i { color: #fff; font-size: 1.1rem; }
     .contact-label {
-      font-size: 0.65rem; font-weight: 600; color: #475569;
+      font-size: 0.65rem; font-weight: 600; color: #64748b;
       text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px;
     }
     .contact-value {
-      color: #e2e8f0; font-size: 0.875rem; font-weight: 500;
-      text-decoration: none; transition: color 0.2s;
+      color: #e2e8f0; font-size: 0.9rem; font-weight: 500;
+      overflow-wrap: anywhere; line-height: 1.5;
     }
-    .contact-value:hover { color: #22d3ee; }
+    /* The action link stretches over the whole card so the card is clickable */
+    .contact-link {
+      margin-top: auto; color: #22d3ee; font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .contact-link::after { content: ''; position: absolute; inset: 0; border-radius: 1rem; }
+    .contact-link i { transition: transform 0.2s; }
+    .contact-card:hover .contact-link i { transform: translateX(3px); }
+    .contact-note { margin-top: auto; color: #64748b; font-size: 0.8rem; }
 
-    .social-card {
-      background: rgba(30,41,59,0.6); border: 1px solid rgba(51,65,85,0.5);
-      border-radius: 0.75rem; padding: 1.25rem;
+    /* Small copy button on the email card, sits above the stretched link */
+    .copy-btn {
+      position: absolute; top: 1.25rem; right: 1.25rem; z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.4rem 0.7rem; border-radius: 0.4rem; cursor: pointer;
+      background: rgba(51,65,85,0.5); border: 1px solid rgba(71,85,105,0.5);
+      color: #cbd5e1; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600;
+      transition: all 0.2s;
     }
-    .social-label {
-      font-size: 0.65rem; font-weight: 600; color: #475569;
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
-    }
-    .social-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .social-link {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.5rem 1rem; background: rgba(51,65,85,0.5);
-      border: 1px solid rgba(71,85,105,0.5); border-radius: 0.5rem;
-      color: #cbd5e1; font-size: 0.875rem; font-weight: 500;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .social-link:hover { background: rgba(71,85,105,0.7); color: #fff; }
+    .copy-btn:hover { color: #fff; border-color: #22d3ee; }
+    .copy-btn.copied { color: #22c55e; border-color: #22c55e; }
 
     /* ════════════════════════════════════════════
        FOOTER
     ════════════════════════════════════════════ */
     footer {
+      margin-left: 256px;
       background: #0f172a; border-top: 1px solid #1e293b; padding: 2rem 1.5rem;
     }
     .footer-inner {
@@ -564,6 +542,9 @@
     .g-blue2   { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
     .g-teal    { background: linear-gradient(135deg, #14b8a6, #22c55e); }
     .g-violet  { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .g-linkedin { background: linear-gradient(135deg, #0a66c2, #004182); }
+    .g-github  { background: linear-gradient(135deg, #475569, #1e293b); }
+    .g-x       { background: linear-gradient(135deg, #334155, #020617); }
     .text-purple { color: #a855f7; }
     .text-green  { color: #22c55e; }
     .text-blue   { color: #3b82f6; }
@@ -577,7 +558,9 @@
       #sidebar.open { transform: translateX(0); }
       #hamburger { display: block; }
       main { margin-left: 0; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      footer { margin-left: 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .comp-grid { grid-template-columns: 1fr 1fr; }
       .timeline::before { display: none; }
@@ -592,6 +575,7 @@
        RESPONSIVE — MOBILE (≤ 480px)
     ════════════════════════════════════════════ */
     @media (max-width: 480px) {
+      .contact-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
       .skills-grid { grid-template-columns: 1fr; }
       .comp-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
@@ -1182,71 +1166,74 @@
           <p class="section-desc">Have a project in mind or want to discuss data opportunities? Feel free to reach out — I'd love to connect!</p>
         </div>
 
+        <!-- EDIT: Each card is one way to reach you. Copy a card to add another. -->
         <div class="contact-grid">
 
-          <!-- Email call-to-action (replaces the old contact form) -->
-          <div class="form-card cta-card">
-            <div class="cta-icon g-blue2"><i class="fas fa-paper-plane"></i></div>
-            <h3 class="cta-title">Let's work together</h3>
-            <p class="cta-text">
-              Whether it's a role, a project or a question about my work, the quickest way to reach me is by email.
-            </p>
-            <!-- EDIT: Your email address (used by both buttons) -->
-            <a href="mailto:ucheson2003@gmail.com?subject=Portfolio%20enquiry" class="btn-primary cta-btn">
-              Email Me <i class="fas fa-envelope"></i>
-            </a>
-            <button type="button" class="btn-outline cta-btn" id="copy-email" data-email="ucheson2003@gmail.com">
-              <span id="copy-email-label">Copy Email Address</span> <i class="fas fa-copy" id="copy-email-icon"></i>
+          <div class="contact-card">
+            <div class="contact-icon g-blue2"><i class="fas fa-envelope"></i></div>
+            <button type="button" class="copy-btn" id="copy-email" data-email="ucheson2003@gmail.com" aria-label="Copy email address">
+              <i class="fas fa-copy" id="copy-email-icon"></i> <span id="copy-email-label">Copy</span>
             </button>
-            <a href="https://www.linkedin.com/in/akaforonyemichael/" target="_blank" rel="noopener noreferrer" class="cta-alt">
-              <i class="fa-brands fa-linkedin"></i> Or message me on LinkedIn
+            <div>
+              <p class="contact-label">Email</p>
+              <p class="contact-value">ucheson2003@gmail.com</p>
+            </div>
+            <a href="mailto:ucheson2003@gmail.com?subject=Portfolio%20enquiry" class="contact-link">
+              Send an email <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
-          <!-- Contact details -->
-          <div class="contact-info">
-            <!-- EDIT: Your address -->
-            <div class="contact-card">
-              <div class="contact-icon g-violet"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <p class="contact-label">Address</p>
-                <p class="contact-value">New-site, Community Rd, Satellite Town, Lagos</p>
-              </div>
+          <div class="contact-card">
+            <div class="contact-icon g-teal"><i class="fas fa-phone"></i></div>
+            <div>
+              <p class="contact-label">Phone</p>
+              <p class="contact-value">+234 816 403 2654</p>
             </div>
-            <!-- EDIT: Your email -->
-            <div class="contact-card">
-              <div class="contact-icon g-blue2"><i class="fas fa-envelope"></i></div>
-              <div>
-                <p class="contact-label">Email</p>
-                <a href="mailto:ucheson2003@gmail.com" class="contact-value">ucheson2003@gmail.com</a>
-              </div>
+            <a href="tel:+2348164032654" class="contact-link">
+              Call me <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon g-linkedin"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div>
+              <p class="contact-label">LinkedIn</p>
+              <p class="contact-value">akaforonyemichael</p>
             </div>
-            <!-- EDIT: Your phone -->
-            <div class="contact-card">
-              <div class="contact-icon g-teal"><i class="fas fa-phone"></i></div>
-              <div>
-                <p class="contact-label">Phone</p>
-                <a href="tel:+2348164032654" class="contact-value">+234 8164032654</a>
-              </div>
+            <a href="https://www.linkedin.com/in/akaforonyemichael/" target="_blank" rel="noopener noreferrer" class="contact-link">
+              Connect on LinkedIn <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon g-github"><i class="fab fa-github"></i></div>
+            <div>
+              <p class="contact-label">GitHub</p>
+              <p class="contact-value">Michaelakaforonye</p>
             </div>
-            <!-- EDIT: Your social links -->
-            <div class="social-card">
-              <p class="social-label">Social Profiles</p>
-              <div class="social-links">
-                <a href="https://www.linkedin.com/in/akaforonyemichael/"
-                   target="_blank" rel="noopener noreferrer" class="social-link">
-                  <i class="fa-brands fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="https://x.com/Rolandakason"
-                   target="_blank" rel="noopener noreferrer" class="social-link">
-                  <i class="fab fa-x-twitter"></i> X
-                </a>
-                <a href="https://github.com/Michaelakaforonye"
-                   target="_blank" rel="noopener noreferrer" class="social-link">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
-              </div>
+            <a href="https://github.com/Michaelakaforonye" target="_blank" rel="noopener noreferrer" class="contact-link">
+              See my code <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon g-x"><i class="fab fa-x-twitter"></i></div>
+            <div>
+              <p class="contact-label">X</p>
+              <p class="contact-value">@Rolandakason</p>
             </div>
+            <a href="https://x.com/Rolandakason" target="_blank" rel="noopener noreferrer" class="contact-link">
+              Follow on X <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon g-violet"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <p class="contact-label">Location</p>
+              <p class="contact-value">New-site, Community Rd, Satellite Town, Lagos</p>
+            </div>
+            <p class="contact-note">Lagos, Nigeria &middot; WAT (UTC+1)</p>
           </div>
 
         </div><!-- /.contact-grid -->
@@ -1324,11 +1311,11 @@
         icon.className = 'fas fa-check';
         copyBtn.classList.add('copied');
       } catch {
-        // Clipboard blocked: show the address so it can be copied by hand
-        label.textContent = email;
+        // Clipboard blocked: ask the visitor to copy it by hand
+        label.textContent = 'Select & copy';
       }
       setTimeout(() => {
-        label.textContent = 'Copy Email Address';
+        label.textContent = 'Copy';
         icon.className = 'fas fa-copy';
         copyBtn.classList.remove('copied');
       }, 2500);
