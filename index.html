@@ -26,6 +26,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
 
+  <script>
+    /* Hide-then-reveal only when JavaScript runs and the visitor allows motion */
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
+        'IntersectionObserver' in window) {
+      document.documentElement.classList.add('js-anim');
+    }
+  </script>
   <style>
     /* ════════════════════════════════════════════
        THEME
@@ -132,7 +139,19 @@
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       background: var(--bg);
     }
-    .hero-content { text-align: center; padding: 1.5rem; max-width: 52rem; }
+    .hero-inner {
+      width: 100%; max-width: 72rem; padding: 3rem 2rem;
+      display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+      gap: 4rem; align-items: center;
+    }
+    .hero-content { text-align: left; }
+    .hero-photo-wrap { justify-self: end; width: 100%; max-width: 340px; }
+    .hero-photo {
+      display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover;
+      border-radius: 2rem; border: 1px solid var(--line-strong); background: var(--card);
+      transition: transform 0.4s ease;
+    }
+    .hero-photo:hover { transform: rotate(-1.5deg) scale(1.02); }
     .hero-tag { color: var(--text-soft); font-size: 1rem; font-weight: 500; margin-bottom: 1rem; }
     .hero-name {
       font-size: clamp(3rem, 8vw, 5.25rem); font-weight: 700; letter-spacing: -0.03em;
@@ -144,9 +163,10 @@
     .hero-subtitle { color: var(--text-body); font-size: 1.25rem; font-weight: 500; }
     .hero-desc {
       color: var(--text-soft); font-size: 1.125rem; max-width: 36rem;
-      margin: 0 auto 2.5rem; line-height: 1.7;
+      margin: 0 0 2.5rem; line-height: 1.7;
     }
-    .hero-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .wave { display: inline-block; transform-origin: 70% 70%; }
 
     /* ════════════════════════════════════════════
        BUTTONS
@@ -203,12 +223,6 @@
     }
     .about-text p span { color: var(--text); font-weight: 600; }
 
-    .about-photo-wrap { display: flex; justify-content: center; margin-bottom: 2rem; }
-    /* EDIT: Adjust width/height to change photo size */
-    .about-photo {
-      width: 180px; height: 180px; object-fit: cover; border-radius: 50%;
-      border: 1px solid var(--line-strong); display: block; background: var(--card);
-    }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
     .tag, .project-tag {
@@ -417,6 +431,40 @@
     .footer-role { color: var(--text-soft); font-size: 0.95rem; }
 
     /* ════════════════════════════════════════════
+       ANIMATIONS — gentle, and switched off for visitors
+       who turn off motion in their system settings
+    ════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: no-preference) {
+      /* Hero: lines fade up one after another, photo eases in, hand waves */
+      .hero-content > * { animation: fade-up 0.7s ease both; }
+      .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+      .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+      .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+      .hero-content > *:nth-child(4) { animation-delay: 0.35s; }
+      .hero-content > *:nth-child(5) { animation-delay: 0.45s; }
+      .hero-photo-wrap { animation: photo-in 0.9s 0.2s cubic-bezier(.2,.7,.2,1) both; }
+      .wave { animation: wave 1.6s 0.9s ease-in-out 1; }
+      .hero-tag:hover .wave { animation: wave 1.6s ease-in-out 1; }
+
+      /* Sections and cards fade up as you scroll to them (see script) */
+      .js-anim .reveal {
+        opacity: 0; transform: translateY(18px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        transition-delay: var(--d, 0ms);
+      }
+      .js-anim .reveal.in { opacity: 1; transform: none; }
+    }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes photo-in { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0); }
+      10%, 30% { transform: rotate(16deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+    }
+
+    /* ════════════════════════════════════════════
        RESPONSIVE — TABLET (≤ 768px)
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
@@ -426,6 +474,13 @@
       main { margin-left: 0; }
       footer { margin-left: 0; }
       section { padding: 5rem 1.25rem; }
+      #intro { padding: 5rem 0 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.25rem; }
+      .hero-photo-wrap { order: -1; justify-self: center; max-width: 200px; }
+      .hero-photo { border-radius: 1.5rem; }
+      .hero-content { text-align: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-btns { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
@@ -507,8 +562,9 @@
          SECTION 0 · HERO / WELCOME
     ───────────────────────────────────── -->
     <section id="intro">
+      <div class="hero-inner">
       <div class="hero-content">
-        <p class="hero-tag">Welcome to my portfolio</p>
+        <p class="hero-tag"><span class="wave" aria-hidden="true">&#128075;</span> Hi, welcome to my portfolio</p>
         <!-- EDIT: Your full name -->
         <h1 class="hero-name">Akaforonye<br><span>Michael</span></h1>
         <div class="hero-divider">
@@ -527,6 +583,12 @@
           <a href="#contact" class="btn-outline">Get In Touch <i class="fas fa-envelope"></i></a>
         </div>
       </div>
+      <!-- EDIT: Profile photo (square image works best, 600×600 px or larger) -->
+      <div class="hero-photo-wrap">
+        <img src="images/profile-photo.jpg" alt="Akaforonye Michael" class="hero-photo"
+             width="600" height="600" fetchpriority="high" />
+      </div>
+      </div>
     </section>
 
     <!-- ─────────────────────────────────────
@@ -540,22 +602,8 @@
 
         <div class="about-grid">
 
-          <!-- Left column: photo + bio + tags -->
+          <!-- Left column: bio + tags -->
           <div class="about-text">
-
-            <!-- ══ PROFILE PHOTO ══
-                 EDIT: Replace src with the path to your photo.
-                 Example (local file): src="images/photo.jpg"
-                 Example (online URL): src="https://example.com/photo.jpg"
-                 The image is circular (border-radius: 50%) and 180×180 px.
-            ══════════════════════ -->
-            <div class="about-photo-wrap">
-              <img
-                src="images/profile-photo.jpg"
-                alt="Akaforonye Michael — profile photo"
-                class="about-photo"
-              />
-            </div>
 
             <!-- EDIT: Your bio paragraphs -->
             <p>
@@ -1188,6 +1236,35 @@
       document.getElementById('lightbox-close').addEventListener('click', () => lightbox.close());
       // Click outside the image closes it
       lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
+    }
+
+    /* ── Gentle fade-up as sections and cards scroll into view ── */
+    if (document.documentElement.classList.contains('js-anim')) {
+      const groups = [
+        '.section-head',
+        '.about-text', '.about-grid > div:last-child',
+        '.timeline-item', '.skill-card', '.competencies',
+        '.project-card', '.contact-card'
+      ];
+      const items = document.querySelectorAll(groups.join(','));
+      // Stagger cards that share a row/grid so they arrive one after another
+      items.forEach(el => {
+        const siblings = [...el.parentElement.children].filter(c => c.matches(groups.join(',')));
+        const i = siblings.indexOf(el) % 3;
+        el.style.setProperty('--d', (i * 90) + 'ms');
+        el.classList.add('reveal');
+      });
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.add('in');
+          revealObserver.unobserve(el);
+          // Hand transitions back to the card's own hover effects
+          setTimeout(() => el.classList.remove('reveal', 'in'), 900);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(el => revealObserver.observe(el));
     }
 
     /* ── Copy email address button ── */
