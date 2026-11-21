@@ -1299,6 +1299,22 @@
       });
     });
 
+    /* ── Email links: on a computer, open Gmail's compose window in a new tab.
+          On phones and tablets, keep the normal mailto: link so the mail app opens. ── */
+    const isComputer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (isComputer) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        const url     = new URL(link.href);
+        const to      = url.pathname;
+        const subject = url.searchParams.get('subject') || '';
+        link.href   = 'https://mail.google.com/mail/?view=cm&fs=1'
+                    + '&to=' + encodeURIComponent(to)
+                    + (subject ? '&su=' + encodeURIComponent(subject) : '');
+        link.target = '_blank';
+        link.rel    = 'noopener noreferrer';
+      });
+    }
+
     /* ── Copy email address button ── */
     const copyBtn = document.getElementById('copy-email');
     copyBtn.addEventListener('click', async () => {
