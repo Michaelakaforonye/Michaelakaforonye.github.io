@@ -299,20 +299,14 @@
        EXPERIENCE SECTION (Timeline)
     ════════════════════════════════════════════ */
     #experience { background: #020617; }
-    .timeline { position: relative; }
-    .timeline::before {
-      content: ''; position: absolute; left: 50%; transform: translateX(-50%);
-      top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(180deg, var(--accent-line), transparent);
-    }
-    .timeline-item { position: relative; display: flex; gap: 2rem; margin-bottom: 2.5rem; }
-    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    /* Jobs sit side by side (newest first); extra jobs wrap onto a new row */
+    .timeline { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .timeline-item { display: flex; }
 
     .exp-card {
-      width: calc(50% - 2rem);
+      width: 100%;
       background: rgba(30,41,59,0.7); border: 1px solid rgba(51,65,85,0.5);
       border-radius: 1rem; padding: 1.5rem; transition: all 0.3s;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
     .exp-card:hover { border-color: rgba(6,182,212,0.4); transform: translateY(-4px); }
 
@@ -334,17 +328,6 @@
     .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
     .exp-points li { display: flex; gap: 0.5rem; color: #cbd5e1; font-size: 0.875rem; line-height: 1.6; }
     .exp-points li .chevron { color: #22d3ee; flex-shrink: 0; margin-top: 4px; font-size: 0.7rem; }
-
-    .timeline-dot {
-      width: 4rem; display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0;
-    }
-    .timeline-dot-inner {
-      width: 1rem; height: 1rem; border-radius: 50%;
-      background: var(--accent);
-      outline: 4px solid #020617;
-    }
-    .timeline-spacer { width: calc(50% - 2rem); }
 
     /* ════════════════════════════════════════════
        SKILLS SECTION
@@ -570,11 +553,7 @@
       .contact-grid { grid-template-columns: 1fr 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .comp-grid { grid-template-columns: 1fr 1fr; }
-      .timeline::before { display: none; }
-      .timeline-item,
-      .timeline-item:nth-child(even) { flex-direction: column; }
-      .exp-card { width: 100%; }
-      .timeline-dot, .timeline-spacer { display: none; }
+      .timeline { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
     }
 
@@ -632,6 +611,9 @@
       <a href="https://x.com/Rolandakason" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
         <i class="fab fa-x-twitter"></i>
       </a>
+      <a href="files/Akaforonye-Michael-CV.pdf" download="Akaforonye-Michael-CV.pdf" aria-label="Download CV" title="Download CV">
+        <i class="fas fa-file-arrow-down"></i>
+      </a>
       <a href="mailto:ucheson2003@gmail.com" aria-label="Email">
         <i class="fas fa-envelope"></i>
       </a>
@@ -669,6 +651,8 @@
         </p>
         <div class="hero-btns">
           <a href="#about"   class="btn-primary">Learn More <i class="fas fa-arrow-down"></i></a>
+          <!-- EDIT: Replace files/Akaforonye-Michael-CV.pdf when your CV changes -->
+          <a href="files/Akaforonye-Michael-CV.pdf" class="btn-outline" download="Akaforonye-Michael-CV.pdf">Download CV <i class="fas fa-file-arrow-down"></i></a>
           <a href="#contact" class="btn-outline">Get In Touch <i class="fas fa-envelope"></i></a>
         </div>
       </div>
@@ -700,7 +684,7 @@
             ══════════════════════ -->
             <div class="about-photo-wrap">
               <img
-                src="images/Headshot.jpg"
+                src="images/profile-photo.jpg"
                 alt="Akaforonye Michael — profile photo"
                 class="about-photo"
               />
@@ -783,7 +767,7 @@
 
         <div class="timeline">
 
-          <!-- EDIT: Experience entry 1 (appears on left of timeline) -->
+          <!-- EDIT: Experience entry 1 (most recent, shown first) -->
           <div class="timeline-item">
             <div class="exp-card">
               <div class="exp-header">
@@ -805,11 +789,9 @@
                 <li><span class="chevron"><i class="fas fa-chevron-right"></i></span> Created interactive Power BI dashboards to track KPIs including revenue, profit, and customer performance.</li>
               </ul>
             </div>
-            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
-            <div class="timeline-spacer"></div>
           </div>
 
-          <!-- EDIT: Experience entry 2 (appears on right of timeline) -->
+          <!-- EDIT: Experience entry 2 -->
           <div class="timeline-item">
             <div class="exp-card">
               <div class="exp-header">
@@ -830,8 +812,6 @@
                 <li><span class="chevron"><i class="fas fa-chevron-right"></i></span> Maintained accurate data recording and reporting of laboratory results.</li>
               </ul>
             </div>
-            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
-            <div class="timeline-spacer"></div>
           </div>
 
           <!-- COPY a timeline-item block above to add more experience entries -->
