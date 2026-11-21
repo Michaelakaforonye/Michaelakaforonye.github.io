@@ -30,6 +30,14 @@
     ════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+    /* EDIT: Site colours. --accent is the one highlight colour used everywhere. */
+    :root {
+      --accent: #22d3ee;
+      --accent-ink: #042f3a;          /* text on solid accent buttons */
+      --accent-tint: rgba(34,211,238,0.10);
+      --accent-line: rgba(34,211,238,0.28);
+      --text-soft: #94a3b8;           /* small labels, captions (readable on dark) */
+    }
     body { background: #020617; color: #e2e8f0; min-height: 100vh; }
 
     /* Custom scrollbar */
@@ -51,12 +59,12 @@
     /* Top gradient bar */
     #sidebar::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
+      background: var(--accent);
     }
     /* Bottom gradient bar */
     #sidebar::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, #a855f7, #3b82f6, #22d3ee);
+      background: var(--accent);
     }
     .sidebar-brand { padding: 0 2rem; margin-bottom: 2.5rem; }
     .sidebar-label {
@@ -81,7 +89,7 @@
     }
     .sidebar-socials { padding: 0 2rem 2rem; display: flex; gap: 1rem; }
     .sidebar-socials a {
-      color: #64748b; font-size: 1.1rem; text-decoration: none; transition: color 0.2s;
+      color: var(--text-soft); font-size: 1.1rem; text-decoration: none; transition: color 0.2s;
     }
     .sidebar-socials a:hover { color: #22d3ee; }
 
@@ -132,7 +140,7 @@
     }
     .hero-orb2 {
       position: absolute; bottom: 25%; right: 25%;
-      width: 320px; height: 320px; background: rgba(37,99,235,0.08);
+      width: 320px; height: 320px; background: rgba(6,182,212,0.06);
       border-radius: 50%; filter: blur(60px);
       animation: orb-pulse 3s ease-in-out 1s infinite;
     }
@@ -151,8 +159,7 @@
       color: #fff; line-height: 1.1; margin-bottom: 1rem;
     }
     .hero-name span {
-      background: linear-gradient(90deg, #22d3ee, #60a5fa, #c084fc);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: var(--accent);
     }
     .hero-divider {
       display: flex; align-items: center; justify-content: center;
@@ -182,15 +189,15 @@
     ════════════════════════════════════════════ */
     .btn-primary {
       display: inline-block; padding: 0.875rem 2rem;
-      background: linear-gradient(90deg, #06b6d4, #2563eb);
-      color: #fff; font-weight: 600; border-radius: 0.5rem;
+      background: var(--accent);
+      color: var(--accent-ink); font-weight: 600; border-radius: 0.5rem;
       text-decoration: none; border: none; cursor: pointer;
       font-family: 'Inter', sans-serif; font-size: 1rem;
-      transition: all 0.2s; box-shadow: 0 0 20px rgba(6,182,212,0.3);
+      transition: all 0.2s;
     }
     .btn-primary:hover {
-      background: linear-gradient(90deg, #22d3ee, #3b82f6);
-      transform: translateY(-2px); box-shadow: 0 0 30px rgba(6,182,212,0.5);
+      background: #67e8f9;
+      transform: translateY(-2px);
     }
     .btn-outline {
       display: inline-block; padding: 0.875rem 2rem;
@@ -215,7 +222,7 @@
     }
     .section-line {
       width: 4rem; height: 4px; border-radius: 9999px;
-      background: linear-gradient(90deg, #22d3ee, #2563eb);
+      background: var(--accent);
       margin: 0.75rem auto 0;
     }
     .section-desc {
@@ -250,10 +257,10 @@
       object-fit: cover;
       border-radius: 50%;
       border: 3px solid rgba(34,211,238,0.5);
-      box-shadow: 0 0 30px rgba(6,182,212,0.25), 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
       display: block;
       /* Shown as a coloured placeholder when image is missing */
-      background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(37,99,235,0.15));
+      background: var(--accent-tint);
     }
 
     /* Skill tags row */
@@ -279,14 +286,14 @@
     .edu-card-inner { display: flex; gap: 1rem; align-items: flex-start; }
     .edu-icon {
       width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(37,99,235,0.2));
-      border: 1px solid rgba(6,182,212,0.3);
+      background: var(--accent-tint);
+      border: 1px solid var(--accent-line);
       display: flex; align-items: center; justify-content: center;
     }
     .edu-icon i { color: #22d3ee; font-size: 0.875rem; }
     .edu-degree { color: #fff; font-weight: 600; font-size: 0.875rem; line-height: 1.4; }
     .edu-inst { color: #22d3ee; font-size: 0.75rem; margin-top: 2px; font-weight: 500; }
-    .edu-period { color: #64748b; font-size: 0.7rem; margin-top: 4px; }
+    .edu-period { color: var(--text-soft); font-size: 0.7rem; margin-top: 4px; }
 
     /* ════════════════════════════════════════════
        EXPERIENCE SECTION (Timeline)
@@ -296,7 +303,7 @@
     .timeline::before {
       content: ''; position: absolute; left: 50%; transform: translateX(-50%);
       top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(180deg, rgba(6,182,212,0.5), rgba(37,99,235,0.3), transparent);
+      background: linear-gradient(180deg, var(--accent-line), transparent);
     }
     .timeline-item { position: relative; display: flex; gap: 2rem; margin-bottom: 2.5rem; }
     .timeline-item:nth-child(even) { flex-direction: row-reverse; }
@@ -313,9 +320,9 @@
     .exp-icon-wrap {
       width: 3rem; height: 3rem; border-radius: 0.75rem;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      flex-shrink: 0;
     }
-    .exp-icon-wrap i { color: #fff; font-size: 1.1rem; }
+    .exp-icon-wrap i { color: var(--accent); font-size: 1.1rem; }
     .exp-role { color: #fff; font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
     .exp-company { color: #22d3ee; font-size: 0.875rem; font-weight: 600; }
     .exp-meta {
@@ -334,8 +341,7 @@
     }
     .timeline-dot-inner {
       width: 1rem; height: 1rem; border-radius: 50%;
-      background: linear-gradient(135deg, #22d3ee, #2563eb);
-      box-shadow: 0 0 15px rgba(6,182,212,0.5);
+      background: var(--accent);
       outline: 4px solid #020617;
     }
     .timeline-spacer { width: calc(50% - 2rem); }
@@ -350,17 +356,16 @@
       border-radius: 1rem; padding: 1.5rem; transition: all 0.3s;
     }
     .skill-card:hover {
-      border-color: rgba(6,182,212,0.4); transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(6,182,212,0.1);
+      border-color: rgba(6,182,212,0.4); transform: translateY(-6px);
     }
     .skill-icon {
       width: 3.5rem; height: 3.5rem; border-radius: 0.75rem;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.25rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      margin-bottom: 1.25rem;
       transition: transform 0.3s;
     }
     .skill-card:hover .skill-icon { transform: scale(1.1); }
-    .skill-icon i { color: #fff; font-size: 1.5rem; }
+    .skill-icon i { color: var(--accent); font-size: 1.5rem; }
     .skill-title { color: #fff; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem; transition: color 0.2s; }
     .skill-card:hover .skill-title { color: #22d3ee; }
     .skill-desc { color: #94a3b8; font-size: 0.875rem; line-height: 1.6; }
@@ -394,42 +399,56 @@
       background: rgba(30,41,59,0.7);
       border: 1px solid rgba(51,65,85,0.5);
       border-radius: 1rem; overflow: hidden;
-      transition: all 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      transition: all 0.3s;
       display: flex; flex-direction: column;
     }
     .project-card:hover {
       border-color: rgba(6,182,212,0.4);
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(6,182,212,0.12);
     }
 
-    /* Image link wrapper — shows icon overlay on hover */
+    /* Screenshot frame — clicking it opens the full-size image */
     .project-img-link {
-      display: block; overflow: hidden; position: relative;
+      display: block; overflow: hidden; position: relative; cursor: zoom-in;
+      background: #0b1120; border-bottom: 1px solid rgba(51,65,85,0.5);
     }
     .project-img-link::after {
-      content: '\f35d'; /* fa-arrow-up-right-from-square unicode */
-      font-family: 'Font Awesome 6 Free'; font-weight: 900;
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: #fff;
-      background: rgba(6,182,212,0.0);
-      transition: background 0.3s, opacity 0.3s;
-      opacity: 0;
+      content: '\f00e  Click to enlarge'; /* fa-magnifying-glass-plus */
+      font-family: 'Font Awesome 6 Free', 'Inter', sans-serif; font-weight: 900;
+      position: absolute; right: 0.75rem; bottom: 0.75rem;
+      font-size: 0.75rem; color: #fff; letter-spacing: 0.02em;
+      background: rgba(2,6,23,0.8); border: 1px solid var(--accent-line);
+      padding: 0.35rem 0.6rem; border-radius: 0.4rem;
+      opacity: 0; transition: opacity 0.2s;
     }
-    .project-card:hover .project-img-link::after {
-      background: rgba(2,6,23,0.55);
-      opacity: 1;
+    .project-card:hover .project-img-link::after,
+    .project-img-link:focus-visible::after { opacity: 1; }
+
+    /* EDIT: aspect-ratio sets the frame shape; the whole screenshot always shows */
+    .project-img {
+      width: 100%; aspect-ratio: 16 / 10; object-fit: contain; display: block;
+      padding: 0.5rem;
     }
 
-    /* EDIT: Change height to make images taller/shorter */
-    .project-img {
-      width: 100%; height: 200px; object-fit: cover; display: block;
-      transition: transform 0.4s;
-      /* Gradient placeholder shown while/if image fails to load */
-      background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(37,99,235,0.15));
+    /* Full-size screenshot viewer */
+    #lightbox {
+      border: none; padding: 0; background: transparent;
+      max-width: 95vw; max-height: 95vh; margin: auto;
     }
-    .project-card:hover .project-img { transform: scale(1.05); }
+    #lightbox::backdrop { background: rgba(2,6,23,0.9); }
+    #lightbox img {
+      display: block; max-width: 95vw; max-height: 85vh; object-fit: contain;
+      border-radius: 0.5rem; background: #0b1120;
+    }
+    .lightbox-bar {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      margin-top: 0.75rem; color: #e2e8f0; font-size: 0.9rem;
+    }
+    .lightbox-close {
+      background: var(--accent-tint); border: 1px solid var(--accent-line); color: var(--accent);
+      border-radius: 0.4rem; padding: 0.4rem 0.8rem; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.8rem;
+    }
 
     .project-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
     .project-title {
@@ -477,16 +496,14 @@
     }
     .contact-card:has(.contact-link):hover {
       border-color: rgba(6,182,212,0.4); transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(6,182,212,0.08);
     }
     .contact-icon {
       width: 3rem; height: 3rem; border-radius: 0.75rem; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .contact-icon i { color: #fff; font-size: 1.1rem; }
+    .contact-icon i { color: var(--accent); font-size: 1.1rem; }
     .contact-label {
-      font-size: 0.65rem; font-weight: 600; color: #64748b;
+      font-size: 0.7rem; font-weight: 600; color: var(--text-soft);
       text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px;
     }
     .contact-value {
@@ -501,7 +518,7 @@
     .contact-link::after { content: ''; position: absolute; inset: 0; border-radius: 1rem; }
     .contact-link i { transition: transform 0.2s; }
     .contact-card:hover .contact-link i { transform: translateX(3px); }
-    .contact-note { margin-top: auto; color: #64748b; font-size: 0.8rem; }
+    .contact-note { margin-top: auto; color: var(--text-soft); font-size: 0.8rem; }
 
     /* Small copy button on the email card, sits above the stretched link */
     .copy-btn {
@@ -527,28 +544,18 @@
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 1rem;
     }
-    .footer-copy { color: #475569; font-size: 0.875rem; }
-    .footer-role { color: #334155; font-size: 0.75rem; }
+    .footer-copy { color: var(--text-soft); font-size: 0.875rem; }
+    .footer-role { color: #64748b; font-size: 0.75rem; }
 
     /* ════════════════════════════════════════════
        GRADIENT UTILITY CLASSES
     ════════════════════════════════════════════ */
-    .g-green   { background: linear-gradient(135deg, #22c55e, #059669); }
-    .g-blue    { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-    .g-yellow  { background: linear-gradient(135deg, #facc15, #ca8a04); }
-    .g-orange  { background: linear-gradient(135deg, #fb923c, #ea580c); }
-    .g-purple  { background: linear-gradient(135deg, #a855f7, #7c3aed); }
-    .g-cyan    { background: linear-gradient(135deg, #06b6d4, #0d9488); }
-    .g-blue2   { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
-    .g-teal    { background: linear-gradient(135deg, #14b8a6, #22c55e); }
-    .g-violet  { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-    .g-linkedin { background: linear-gradient(135deg, #0a66c2, #004182); }
-    .g-github  { background: linear-gradient(135deg, #475569, #1e293b); }
-    .g-x       { background: linear-gradient(135deg, #334155, #020617); }
-    .text-purple { color: #a855f7; }
-    .text-green  { color: #22c55e; }
-    .text-blue   { color: #3b82f6; }
-    .text-orange { color: #fb923c; }
+    /* Icon boxes: all share the accent tint (class names kept so HTML needs no changes) */
+    .g-green, .g-blue, .g-yellow, .g-orange, .g-purple, .g-cyan,
+    .g-blue2, .g-teal, .g-violet, .g-linkedin, .g-github, .g-x {
+      background: var(--accent-tint); border: 1px solid var(--accent-line);
+    }
+    .text-purple, .text-green, .text-blue, .text-orange { color: var(--accent); }
 
     /* ════════════════════════════════════════════
        RESPONSIVE — TABLET (≤ 768px)
@@ -1242,6 +1249,15 @@
 
   </main><!-- /main -->
 
+  <!-- Full-size project screenshot (opened by clicking a project image) -->
+  <dialog id="lightbox" aria-label="Project screenshot">
+    <img src="" alt="" id="lightbox-img" />
+    <div class="lightbox-bar">
+      <span id="lightbox-caption"></span>
+      <button type="button" class="lightbox-close" id="lightbox-close">Close <i class="fas fa-xmark"></i></button>
+    </div>
+  </dialog>
+
   <!-- ══════════════════════════════════════════
        FOOTER
   ══════════════════════════════════════════ -->
@@ -1313,6 +1329,26 @@
         link.target = '_blank';
         link.rel    = 'noopener noreferrer';
       });
+    }
+
+    /* ── Project screenshots: open full size in the viewer ── */
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lightbox-img');
+    const lbCap    = document.getElementById('lightbox-caption');
+    if (lightbox && typeof lightbox.showModal === 'function') {
+      document.querySelectorAll('.project-img-link').forEach(link => {
+        link.addEventListener('click', e => {
+          const img = link.querySelector('img');
+          e.preventDefault();
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lbCap.textContent = link.closest('.project-card').querySelector('.project-title').textContent;
+          lightbox.showModal();
+        });
+      });
+      document.getElementById('lightbox-close').addEventListener('click', () => lightbox.close());
+      // Click outside the image closes it
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
     }
 
     /* ── Copy email address button ── */
